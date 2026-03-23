@@ -1,0 +1,188 @@
+/* resources/css/app.css */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+/* Jika kamu pakai Tailwind v4, gunakan @import "tailwindcss" */
+/* Jika pakai v3, biarkan @tailwind base; dst. */
+@import "tailwindcss";
+@theme {
+    --color-navy: #0c1b2e;
+    --color-navy-light: #132640;
+    --color-navy-deep: #080f1a;
+    --color-section-bg: #0f2035;
+    --color-gold: #c9943a;
+    --color-gold-light: #e8b96a;
+    --color-gold-pale: #f5e6c8;
+    --color-cream: #f8f2e8;
+    --color-text-light: #d4c5a9;
+    --color-text-muted: #8a7d6a;
+
+    --font-serif: "Playfair Display", serif;
+    --font-sans: "DM Sans", sans-serif;
+}
+
+@layer base {
+    body {
+        overflow-x: hidden;
+        font-family: var(--font-sans);
+        background-color: var(--color-navy);
+        color: var(--color-cream);
+    }
+}
+
+@layer components {
+    /* Timeline line */
+    .timeline {
+        position: relative;
+    }
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            #c9943a 10%,
+            #c9943a 90%,
+            transparent
+        );
+        transform: translateX(-50%);
+    }
+    .t-dot::after {
+        content: "";
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #c9943a;
+        border: 3px solid #0c1b2e;
+        box-shadow: 0 0 0 2px #c9943a;
+    }
+
+    .batik-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.03;
+        background-image:
+            repeating-linear-gradient(
+                45deg,
+                #c9943a 0,
+                #c9943a 1px,
+                transparent 0,
+                transparent 50%
+            ),
+            repeating-linear-gradient(
+                -45deg,
+                #c9943a 0,
+                #c9943a 1px,
+                transparent 0,
+                transparent 50%
+            );
+        background-size: 30px 30px;
+    }
+
+    /* Scroll reveal */
+    [data-observe] {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease;
+    }
+    [data-observe].visible {
+        opacity: 1;
+        transform: none;
+    }
+    .delay-100 {
+        transition-delay: 0.1s;
+    }
+    .delay-200 {
+        transition-delay: 0.2s;
+    }
+    .delay-300 {
+        transition-delay: 0.3s;
+    }
+    .delay-400 {
+        transition-delay: 0.4s;
+    }
+    .delay-500 {
+        transition-delay: 0.5s;
+    }
+}
+
+@layer utilities {
+    /* Keyframes & Animations */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+    @keyframes bounce2 {
+        0%,
+        100% {
+            transform: translateX(-50%) translateY(0);
+        }
+        50% {
+            transform: translateX(-50%) translateY(8px);
+        }
+    }
+    @keyframes waPulse {
+        0%,
+        100% {
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        }
+        50% {
+            box-shadow: 0 4px 32px rgba(37, 211, 102, 0.75);
+        }
+    }
+
+    .animate-fadeInDown {
+        animation: fadeInDown 0.8s ease both;
+    }
+    .animate-fadeInUp {
+        animation: fadeInUp 1s ease both;
+    }
+    .animate-bounce2 {
+        animation: bounce2 2s infinite;
+    }
+    .animate-waPulse {
+        animation: waPulse 2.5s infinite;
+    }
+}
+
+/* Timeline mobile (Media Query biarkan di luar layer agar selalu jalan) */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+    .timeline-item {
+        grid-template-columns: 40px 1fr !important;
+    }
+    .timeline-item .t-content {
+        grid-column: 2 !important;
+        text-align: left !important;
+        padding: 0 0 0 1.5rem !important;
+    }
+    .timeline-item .t-dot {
+        grid-column: 1;
+        justify-content: flex-start;
+        padding-left: 13px;
+    }
+    .timeline-item .t-empty {
+        display: none !important;
+    }
+}

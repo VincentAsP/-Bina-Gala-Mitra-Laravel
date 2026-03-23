@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* resources/css/landing.css */
+body {
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #C9943A 10%, #C9943A 90%, transparent);
+    transform: translateX(-50%);
+}
+
+.t-dot::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #C9943A;
+    border: 3px solid #0C1B2E;
+    box-shadow: 0 0 0 2px #C9943A;
+}
+
+/* Scroll reveal */
+[data-observe] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+[data-observe].visible {
+    opacity: 1;
+    transform: none;
+}
+
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
+}
+
+.delay-400 {
+    transition-delay: 0.4s;
+}
+
+.delay-500 {
+    transition-delay: 0.5s;
+}
+
+/* Batik pattern */
+.batik-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image:
+        repeating-linear-gradient(45deg, #C9943A 0, #C9943A 1px, transparent 0, transparent 50%),
+        repeating-linear-gradient(-45deg, #C9943A 0, #C9943A 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+}
+
+/* Timeline responsive */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        grid-template-columns: 40px 1fr !important;
+    }
+
+    .timeline-item .t-content {
+        grid-column: 2 !important;
+        text-align: left !important;
+        padding: 0 0 0 1.5rem !important;
+    }
+
+    .timeline-item .t-dot {
+        grid-column: 1;
+        justify-content: flex-start;
+        padding-left: 13px;
+    }
+
+    .timeline-item .t-empty {
+        display: none !important;
+    }
+}
